@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+    {{ article.title }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1> {{ article.title }}</h1>
+        <hr>
+        {{ article.content | raw }}
+        <hr>
+            <h2 class="comment-title mt-5">
+                <span id="comment-count">{{ article.comments|length }}</span> commentaire(s)
+            </h2>
+            <hr>
+            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                {{ form(form, {'attr':{'class':'comment-form'}}) }}
+            {% endif %}
+            
+            
+            <div class="comment-list">
+                {% for comment in commentsPaginated %}
+                    {% include "comment/index.html.twig" %}
+                {% endfor %}
+            </div>
+            
+        
+    </div>
+    <div class="container d-flex justify-content-center">
+        <div class="navigation">
+            {{ knp_pagination_render(commentsPaginated) }}
+        </div>
+    </div>
+    
+{% endblock %}

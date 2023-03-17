@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %}Accueil
+{% endblock%}
+{% block body %}
+	<div class="container">
+		
+		<div class="row mt-4">
+		<div class="col-md-8">
+			<h3 class="pb-4 mb-4 fst-italic border-bottom">Articles récents</h3>
+			<div id="article-list">
+				{% include "article/list.html.twig" %}
+			</div>
+		</div>
+		<div class="col-md-4 bg-light">
+			<div class="position-sticky" style="top:180px">
+				{% include "widget/about.html.twig" %}
+			
+			
+			{# {% include "widget/categories.html.twig" %} #}
+			<div class="p-4">
+				<h4 class="fst-italic">Archives</h4>
+				<ol class="list-unstyled mb-0">
+					{% for month in months %}
+						<li ><a href="{{ path('app_archive',{month:month })}}" class="text-success">{{ month }}</a></li>
+					{% endfor %}
+				</ol>
+			</div>
+			</div>
+		</div>
+		
+	</div>
+	</div>
+	<div class="container d-flex justify-content-center my-4">
+		<div class="navigation">
+			{{ knp_pagination_render(articles) }}
+		</div>
+	</div>
+	
+{% endblock %}

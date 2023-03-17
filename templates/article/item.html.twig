@@ -1,0 +1,30 @@
+<article class="mb-5">
+    <div class="row d-flex align-items-center">
+        <div class="col-md-{{ leftcol??5 }}">
+            {% if article.featuredImage %}
+                <a href="{{ path('article_show',{slug:article.slug}) }}">
+                    <img src="/uploads/{{ article.featuredImage.filename }}" class ="featuredImage" 
+                        alt="{{ article.featuredImage.altText}}"
+                    >
+                </a>
+            {% endif %}
+        </div>
+
+        <div class="col-md-{{ rightcol??7 }}">
+           
+            <a class='text-decoration-none' href="{{ path('article_show',{slug:article.slug}) }}">
+                <h3 class="my-4">{{ article.title }} </h3>
+            </a>        
+               
+                <p class="text-warning text-end"></i> class="text-decoration-none text-info">{{ article.author.fullName}}</a>&nbsp<i class="fa-solid fa-calendar-days"></i> {{ article.createdAt|date('d/m/Y') }}</p>
+                <p>{{ article.content|striptags|slice(0, 300)~ '...'}}</p>
+                 {% for category in article.categories %}
+                    <p class="fst-italic" style="color:{{ category.color }}"> #{{ category.name }}</p>
+                 {% endfor %}
+
+            
+        </div>
+        
+        
+    </div>
+</article>

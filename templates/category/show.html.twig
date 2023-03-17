@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+ {{ parent()}}{{category }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row g-5">
+            <div class="col">
+                <h3 class="border-bottom pb-4 mv-4 fst-italic" style ="color:{{ category.color }}">{{ category.name }}</h3>
+                <div id="article-list">
+                    {% include "article/list.html.twig" with{articles: category.articles, leftcol:4, rightcol:8 } %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
